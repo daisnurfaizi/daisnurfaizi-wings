@@ -31,6 +31,7 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Setup SSH key
         env:
+          USER: root
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.SSH_HOST }}
           PROJECT_PATH: /var/www/html/compro/daisnurfaizi
@@ -44,4 +45,4 @@ jobs:
           ssh-keyscan -H $KNOWN_HOSTS >> ~/.ssh/known_hosts
       - name: Update source code
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd $PROJECT_PATH && git pull"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER@${{ secrets.SSH_HOST }} "cd $PROJECT_PATH && git pull"
