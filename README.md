@@ -1,4 +1,4 @@
-# Dokumentasi Laravel
+# Dokumentasi Project
 
 ## Deskripsi
 Ini adalah dokumentasi untuk Project ini dengan minimal requirement PHP 8.1 dan Node minimal versi 16.
