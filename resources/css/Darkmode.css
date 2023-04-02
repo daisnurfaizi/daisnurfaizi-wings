@@ -1,0 +1,9 @@
+.toggle-dark-mode:not(:checked) ~ .bg-white {
+    background-color: #fff;
+    color: #000;
+}
+
+.toggle-dark-mode:checked ~ .bg-white {
+    background-color: #2d3748;
+    color: #fff;
+}

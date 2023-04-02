@@ -1,0 +1,12 @@
+<?php
+
+namespace {namespace};
+
+class {class}
+{
+    {columns}
+    public function __construct({value})
+        {
+            {constructor}
+        }
+}
