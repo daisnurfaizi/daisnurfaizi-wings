@@ -1,0 +1,38 @@
+name: Laravel
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up PHP
+        uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: "8.1"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Build assets
+        run: npm run build
+      - name: Set directory permissions
+        run: chmod -R 777 storage bootstrap/cache
+      - name: Run migrations
+        run: php artisan migrate
+      - name: Setup SSH key
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.SSH_HOST }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          sudo apt-get install -y openssh-client
+          echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          ssh-add private_key
+          rm -f private_key
