@@ -45,4 +45,4 @@ jobs:
           ssh-keyscan -H $KNOWN_HOSTS >> ~/.ssh/known_hosts
       - name: Update source code
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER@$KNOWN_HOSTS "cd $PROJECT_PATH && git pull"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@139.162.1.216 "cd /var/www/html/compro/daisnurfaizi && git pull"
