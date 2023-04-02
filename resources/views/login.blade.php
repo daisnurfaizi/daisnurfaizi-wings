@@ -43,7 +43,7 @@
                         'text-gray-100': mode === 'dark',
                         'text-gray-900': mode === 'light'
                     }">
-                    Login Aplikasi</h3>
+                    Login </h3>
                 <form class="space-y-6" action="{{ route('cekLogin') }}" method="POST">
                     @csrf
                     <div>

@@ -33,6 +33,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.SSH_HOST }}
+          PROJECT_PATH: /var/www/html/compro/daisnurfaizi
         run: |
           sudo apt-get update
           sudo apt-get install -y libssl-dev openssh-client
@@ -41,3 +42,6 @@ jobs:
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $KNOWN_HOSTS >> ~/.ssh/known_hosts
+      - name: Update source code
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd $PROJECT_PATH && git pull"
