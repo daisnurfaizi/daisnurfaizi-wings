@@ -28,7 +28,7 @@ jobs:
       - name: Set directory permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Run migrations
-        run: php artisan migrate
+        run: php artisan migrate --force
       - name: Setup SSH key
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
